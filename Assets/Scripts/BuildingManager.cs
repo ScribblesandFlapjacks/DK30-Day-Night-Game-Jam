@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] Buildings buildings;
-    Buildings placementBuilding;
+    [SerializeField] GameObject temporaryBuilding;
+    [SerializeField] GameObject building;
+    GameObject placementBuilding;
     float circleRadius = 3.8f;
     int buildingCost;
+    bool canPlaceBuilding = true;
 
     PlayerMovement playerMovement;
     Resources resources;
@@ -26,9 +28,9 @@ public class BuildingManager : MonoBehaviour
             Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
             placementBuilding.transform.position = newPosition;
             placementBuilding.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()+5));
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
             {
-                Instantiate(buildings, placementBuilding.transform.position, placementBuilding.transform.rotation);
+                Instantiate(building, placementBuilding.transform.position, placementBuilding.transform.rotation);
                 resources.DecreaseResources(buildingCost);
                 Destroy(placementBuilding.gameObject);
                 placementBuilding = null;
@@ -39,8 +41,21 @@ public class BuildingManager : MonoBehaviour
 
     public void BeginBuildingPlacement(int cost)
     {
-        placementBuilding = Instantiate(buildings, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
-        placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
-        buildingCost = cost;
+        if(placementBuilding == null)
+        {
+            placementBuilding = Instantiate(temporaryBuilding, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
+            placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
+            buildingCost = cost;
+        }
+    }
+
+    public void CanPlaceBuilding()
+    {
+        canPlaceBuilding = true;
+    }
+
+    public void CantPlaceBuilding()
+    {
+        canPlaceBuilding = false;
     }
 }
