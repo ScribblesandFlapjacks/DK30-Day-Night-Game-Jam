@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TempBuilding : MonoBehaviour
 {
+    //cached references
     Renderer renderer;
     BuildingManager buildingManager;
+
     int numberOfCollisions = 0;
 
     private void Start()

@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public void MoveCounterclockwise()
     {
         currentRotation--;
-        //Debug.Log(currentRotation);
         float rotationInRadians = Mathf.PI * currentRotation / 180;
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;
@@ -21,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public void MoveClockwise()
     {
         currentRotation++;
-        //Debug.Log(currentRotation);
         float rotationInRadians = Mathf.PI * currentRotation / 180;
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;

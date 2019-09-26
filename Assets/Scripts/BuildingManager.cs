@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] GameObject temporaryBuilding;
-    [SerializeField] GameObject building;
-    GameObject placementBuilding;
     float circleRadius = 3.8f;
     int buildingCost;
     bool canPlaceBuilding = true;
+    
+    //cached references
+    [SerializeField] GameObject temporaryBuilding;
+    [SerializeField] GameObject building;
+    GameObject placementBuilding;
     PlayerMovement playerMovement;
     Resources resources;
 
@@ -21,6 +23,7 @@ public class BuildingManager : MonoBehaviour
 
     private void Update()
     {
+        //Adjusts temporaryBuilding's position to match the player avatar
         if(placementBuilding != null)
         {
             float rotationInRadians = Mathf.PI * (playerMovement.GetCurrentRotationDegree() + 5) / 180;
@@ -28,6 +31,7 @@ public class BuildingManager : MonoBehaviour
             Vector2 offsetPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
             placementBuilding.transform.position = newPosition;
             placementBuilding.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()+5));
+            //If the player left clicks and there are no building placement conflicts create a building object in the current position and destroy the temporary building
             if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
             {
                 Instantiate(building, placementBuilding.transform.position, placementBuilding.transform.rotation);
@@ -39,12 +43,13 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    //Creates a temporaryBuilding for building placement visualization
     public void BeginBuildingPlacement(int cost)
     {
         if(placementBuilding == null)
         {
             placementBuilding = Instantiate(temporaryBuilding, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
-            placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
+            //placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
             buildingCost = cost;
         }
     }

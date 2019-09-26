@@ -9,6 +9,8 @@ public class Buildings : MonoBehaviour
     int buildingHealth = 100;
     int resourcesProduces = 10;
     float productionRate = 3f;
+
+    //cached references
     Renderer building;
     Resources resources;
 
@@ -29,6 +31,7 @@ public class Buildings : MonoBehaviour
         }
     }
 
+    //Changes the building twice at buildingStageRate before beginning resource production
     IEnumerator BuildInStages()
     {
         yield return new WaitForSeconds(buildingStageRate);
@@ -36,9 +39,11 @@ public class Buildings : MonoBehaviour
         yield return new WaitForSeconds(buildingStageRate);
         building.material.color = new Color32(0, 255, 0, 255);
         isFinishedBuilding = true;
+        //Produces resources every productionRate seconds until object is destroyed.
         InvokeRepeating("ProduceResources", 0f, productionRate);
     }
 
+    //Adds resourcesProduces to the currentResource value in resources
     private void ProduceResources()
     {
         resources.IncreaseResources(resourcesProduces);
