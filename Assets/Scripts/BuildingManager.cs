@@ -10,7 +10,6 @@ public class BuildingManager : MonoBehaviour
     float circleRadius = 3.8f;
     int buildingCost;
     bool canPlaceBuilding = true;
-
     PlayerMovement playerMovement;
     Resources resources;
 
@@ -26,6 +25,7 @@ public class BuildingManager : MonoBehaviour
         {
             float rotationInRadians = Mathf.PI * (playerMovement.GetCurrentRotationDegree() + 5) / 180;
             Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
+            Vector2 offsetPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
             placementBuilding.transform.position = newPosition;
             placementBuilding.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()+5));
             if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
