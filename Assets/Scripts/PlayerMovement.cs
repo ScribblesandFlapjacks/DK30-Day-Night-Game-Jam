@@ -10,20 +10,35 @@ public class PlayerMovement : MonoBehaviour
     public void MoveCounterclockwise()
     {
         currentRotation--;
-        //Debug.Log(currentRotation);
         float rotationInRadians = Mathf.PI * currentRotation / 180;
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
+        GetComponent<SpriteRenderer>().flipX = true;
     }
 
     public void MoveClockwise()
     {
         currentRotation++;
-        //Debug.Log(currentRotation);
         float rotationInRadians = Mathf.PI * currentRotation / 180;
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
+        GetComponent<SpriteRenderer>().flipX = false;
+    }
+
+    public Vector2 GetCurrentLocation()
+    {
+        return transform.position;
+    }
+
+    public int GetCurrentRotationDegree()
+    {
+        return currentRotation;
+    }
+
+    public Quaternion GetCurrentRotationQuaternion()
+    {
+        return transform.rotation;
     }
 }
