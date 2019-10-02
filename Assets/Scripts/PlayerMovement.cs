@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
-        GetComponent<SpriteRenderer>().flipX = true;
+        GetComponent<SpriteRenderer>().flipX = false;
     }
 
     public void MoveClockwise()
@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
-        GetComponent<SpriteRenderer>().flipX = false;
+        GetComponent<SpriteRenderer>().flipX = true;
     }
 
     public Vector2 GetCurrentLocation()

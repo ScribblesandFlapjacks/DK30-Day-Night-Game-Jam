@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //cached references
+    [SerializeField] GameObject playerAvatar;
+    Animator animator;
     PlayerMovement playerMovement;
     BuildingUI buildingUI;
     BuildingManager buildingManager;
@@ -12,7 +14,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        animator = playerAvatar.GetComponent<Animator>();
+        playerMovement = playerAvatar.GetComponent<PlayerMovement>();
+        //playerMovement = FindObjectOfType<PlayerMovement>();
         buildingUI = FindObjectOfType<BuildingUI>();
         buildingManager = FindObjectOfType<BuildingManager>();
     }
@@ -23,10 +27,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             playerMovement.MoveCounterclockwise();
+            animator.SetBool("isWalking", true);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             playerMovement.MoveClockwise();
+            animator.SetBool("isWalking", true);
+        }
+        if(!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))){
+            animator.SetBool("isWalking", false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
