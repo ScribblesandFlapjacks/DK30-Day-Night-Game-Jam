@@ -26,7 +26,7 @@ public class BuildingManager : MonoBehaviour
         //Adjusts temporaryBuilding's position to match the player avatar
         if(placementBuilding != null)
         {
-            float rotationInRadians = Mathf.PI * (playerMovement.GetCurrentRotationDegree() + 5) / 180;
+            float rotationInRadians = Mathf.PI * (playerMovement.GetCurrentRotationDegree()) / 180;
             Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
             Vector2 offsetPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
             placementBuilding.transform.position = newPosition;
