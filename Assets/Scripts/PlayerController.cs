@@ -25,15 +25,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             playerMovement.MoveCounterclockwise();
-            //animator.SetBool("isWalking", true);
+            animator.SetBool("isWalking", true);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             playerMovement.MoveClockwise();
-            //animator.SetBool("isWalking", true);
+            animator.SetBool("isWalking", true);
         }
         if(!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))){
-            //animator.SetBool("isWalking", false);
+            animator.SetBool("isWalking", false);
         }
     }
 }
