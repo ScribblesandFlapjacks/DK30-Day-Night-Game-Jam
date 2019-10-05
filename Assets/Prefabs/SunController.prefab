@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3169753197750939875}
   m_Layer: 0
-  m_Name: SunController 1
+  m_Name: SunController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
