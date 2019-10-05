@@ -7,11 +7,15 @@ public class BuildingUI : MonoBehaviour
     Resources resources;
     bool buildingUnavailable = false;
     [SerializeField] int buildingCost;
+    [SerializeField] KeyCode keyCode;
+    [SerializeField] GameObject building;
+    [SerializeField] GameObject placementBuilding;
 
-    Transform building;
+    Transform buildingUI;
     Transform background;
-    Renderer buildingColor;
+    Renderer buildingRenderer;
     Renderer backgroundColor;
+    BuildingManager buildingManager;
 
     Color32 unavailableColor = new Color32(165, 175, 175, 100);
     Color32 defaultColor = new Color32(255, 255, 255, 255);
@@ -20,15 +24,16 @@ public class BuildingUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        building = gameObject.transform.Find("TestBuilding");
+        buildingManager = FindObjectOfType<BuildingManager>();
+        buildingUI = gameObject.transform.Find("TestBuilding");
         background = gameObject.transform.Find("BuildingBarBlock");
-        buildingColor = building.GetComponent<Renderer>();
+        buildingRenderer = buildingUI.GetComponent<Renderer>();
         backgroundColor = background.GetComponent<Renderer>();
         resources = FindObjectOfType<Resources>();
         if(resources.GetCurrentResources() < buildingCost)
         {
             buildingUnavailable = true;
-            building.GetComponent<Renderer>().material.color = unavailableColor;
+            buildingRenderer.material.color = unavailableColor;
         }
     }
 
@@ -38,15 +43,22 @@ public class BuildingUI : MonoBehaviour
         if (resources.GetCurrentResources() < buildingCost)
         {
             buildingUnavailable = true;
-            buildingColor.material.color = unavailableColor;
+            buildingRenderer.material.color = unavailableColor;
         } else
         {
             buildingUnavailable = false;
-            buildingColor.material.color = defaultColor;
+            buildingRenderer.material.color = defaultColor;
+        }
+        if (Input.GetKeyDown(keyCode))
+        {
+            if (IsBuildingPurchasable())
+            {
+                buildingManager.BeginBuildingPlacement(buildingCost, placementBuilding, building);
+            }
         }
     }
 
-    public bool IsBuildingPurchasable()
+    private bool IsBuildingPurchasable()
     {
         if (buildingUnavailable)
         {
@@ -63,10 +75,5 @@ public class BuildingUI : MonoBehaviour
         backgroundColor.material.color = unpurchasable;
         yield return new WaitForSeconds(.2f);
         backgroundColor.material.color = defaultColor;
-    }
-
-    public int GetBuildingCost()
-    {
-        return buildingCost;
     }
 }

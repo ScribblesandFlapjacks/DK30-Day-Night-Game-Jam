@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     PlayerMovement playerMovement;
     [SerializeField] GameObject[] buildingUI;
-    BuildingManager buildingManager;
+    //BuildingManager buildingManager;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         playerMovement = playerAvatar.GetComponent<PlayerMovement>();
         //playerMovement = FindObjectOfType<PlayerMovement>();
         //buildingUI = FindObjectOfType<BuildingUI>();
-        buildingManager = FindObjectOfType<BuildingManager>();
+        //buildingManager = FindObjectOfType<BuildingManager>();
     }
 
     // Update is called once per frame
@@ -36,14 +36,6 @@ public class PlayerController : MonoBehaviour
         }
         if(!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))){
             animator.SetBool("isWalking", false);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            BuildingUI currentUI = buildingUI[0].GetComponent<BuildingUI>();
-            if (currentUI.IsBuildingPurchasable())
-            {
-                buildingManager.BeginBuildingPlacement(currentUI.GetBuildingCost());
-            }
         }
     }
 }
