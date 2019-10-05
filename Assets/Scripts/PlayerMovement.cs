@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Vector2 origin = new Vector2(0, 0);
     [SerializeField] float playerSpeed = 50;
     float currentRotation = 0;
     float circleRadius = 3.5f;
