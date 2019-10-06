@@ -15,6 +15,7 @@ public class Buildings : MonoBehaviour
     //cached references
     Renderer building;
     Resources resources;
+    Renderer buildingIndicator;
 
     bool playerIsHere = false;
 
@@ -23,6 +24,7 @@ public class Buildings : MonoBehaviour
     {
         resources = FindObjectOfType<Resources>();
         building = GetComponent<Renderer>();
+        buildingIndicator = gameObject.transform.Find("BuildingIndicator").GetComponent<Renderer>();
         InvokeRepeating("Produce", 0f, productionRate);
     }
 
@@ -37,13 +39,13 @@ public class Buildings : MonoBehaviour
 
         if(storedResources < 20)
         {
-            building.material.color = new Color32(255, 255, 255, 255);
+            buildingIndicator.material.color = new Color32(255, 0, 0, 255);
         } else if(storedResources < 40)
         {
-            building.material.color = new Color32(0, 150, 255, 255);
+            buildingIndicator.material.color = new Color32(255, 255, 0, 255);
         } else if (storedResources == maxVolume)
         {
-            building.material.color = new Color32(0, 255, 0, 255);
+            buildingIndicator.material.color = new Color32(0, 255, 0, 255);
         }
 
         if(buildingHealth < 1)

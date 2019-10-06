@@ -25,9 +25,9 @@ public class Temperature : MonoBehaviour
 
     private void FixedUpdate() {
         if (isInSun) {
-            IncreaseTemperature(sunIncreaseTemp);
+            IncreaseTemperature(sunIncreaseTemp * Time.deltaTime);
         } else {
-            DecreaseTemperature(sunDecreaseTemp);
+            DecreaseTemperature(sunDecreaseTemp * Time.deltaTime);
         }
     }
 
