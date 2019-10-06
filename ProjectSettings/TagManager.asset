@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Building
+  - Undefined
+  - RocketPart
+  - RocketPart2
   layers:
   - Default
   - TransparentFX
