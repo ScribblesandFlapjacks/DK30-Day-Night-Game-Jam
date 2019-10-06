@@ -4,19 +4,44 @@ using UnityEngine;
 
 public class Temperature : MonoBehaviour
 {
-    [SerializeField] int currentTemperature = 0;
+    [SerializeField] float currentTemperature = 0;
+    [SerializeField] float sunIncreaseTemp = 20;
+    [SerializeField] float sunDecreaseTemp = 15;
+    bool isInSun = true;
 
-    public void IncreaseTemperature(int tempToIncreaseBy)
+    private void OnTriggerEnter2D(Collider2D collision) {
+        //check if collision is with DaylightOverlay
+        if (collision.gameObject.layer.Equals(8)) {
+            isInSun = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        //check if collision is with DaylightOverlay
+        if (collision.gameObject.layer.Equals(8)) {
+            isInSun = false;
+        }
+    }
+
+    private void FixedUpdate() {
+        if (isInSun) {
+            IncreaseTemperature(sunIncreaseTemp);
+        } else {
+            DecreaseTemperature(sunDecreaseTemp);
+        }
+    }
+
+    public void IncreaseTemperature(float tempToIncreaseBy)
     {
         currentTemperature += tempToIncreaseBy;
     }
 
-    public void DecreaseTemperature(int tempToDecreaseBy)
+    public void DecreaseTemperature(float tempToDecreaseBy)
     {
         currentTemperature -= tempToDecreaseBy;
     }
 
-    public int GetCurrentTemperature()
+    public float GetCurrentTemperature()
     {
         return currentTemperature;
     }
