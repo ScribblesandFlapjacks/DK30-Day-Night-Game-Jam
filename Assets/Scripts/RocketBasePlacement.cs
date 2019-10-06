@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempBuilding : MonoBehaviour
+public class RocketBasePlacement : MonoBehaviour
 {
     //cached references
     Renderer renderer;
     BuildingManager buildingManager;
     PlayerMovement playerMovement;
     CircleMath circleMath;
-    float circleRadius = 3.8f;
 
     int numberOfCollisions = 0;
 
@@ -29,7 +28,7 @@ public class TempBuilding : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Building" || collision.gameObject.tag == "RocketPart")
+        if (collision.gameObject.tag == "Building")
         {
             numberOfCollisions++;
             renderer.material.color = new Color32(255, 0, 0, 150);
@@ -39,10 +38,10 @@ public class TempBuilding : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "RocketPart")
+        if (collision.gameObject.tag == "Building")
         {
             numberOfCollisions--;
-            if(numberOfCollisions == 0)
+            if (numberOfCollisions == 0)
             {
                 renderer.material.color = new Color32(255, 255, 255, 150);
                 buildingManager.CanPlaceBuilding();

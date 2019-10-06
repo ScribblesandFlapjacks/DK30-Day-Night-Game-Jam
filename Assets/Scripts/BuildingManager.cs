@@ -9,11 +9,16 @@ public class BuildingManager : MonoBehaviour
     bool canPlaceBuilding = true;
     
     //cached references
-    [SerializeField] GameObject temporaryBuilding;
-    [SerializeField] GameObject building;
+    //[SerializeField] GameObject temporaryBuilding;
+    //[SerializeField] GameObject building;
     GameObject placementBuilding;
+    GameObject constructionBuilding;
     PlayerMovement playerMovement;
     Resources resources;
+
+    bool rocketBasePlaced = false;
+    bool rocketStageTwo = false;
+    bool rocketStageThree = false;
 
     private void Start()
     {
@@ -26,32 +31,38 @@ public class BuildingManager : MonoBehaviour
         //Adjusts temporaryBuilding's position to match the player avatar
         if(placementBuilding != null)
         {
-            float rotationInRadians = Mathf.PI * (playerMovement.GetCurrentRotationDegree()) / 180;
-            Vector2 newPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
-            Vector2 offsetPosition = new Vector2(circleRadius * Mathf.Sin(rotationInRadians), circleRadius * Mathf.Cos(rotationInRadians));
-            placementBuilding.transform.position = newPosition;
-            placementBuilding.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()+5));
             //If the player left clicks and there are no building placement conflicts create a building object in the current position and destroy the temporary building
             if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
             {
-                Instantiate(building, placementBuilding.transform.position, placementBuilding.transform.rotation);
+                Instantiate(constructionBuilding, placementBuilding.transform.position, placementBuilding.transform.rotation);
                 resources.DecreaseResources(buildingCost);
-                Destroy(placementBuilding.gameObject);
-                placementBuilding = null;
-                buildingCost = 0;
+                resetCurrentBuilding();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                resetCurrentBuilding();
             }
         }
     }
 
     //Creates a temporaryBuilding for building placement visualization
-    public void BeginBuildingPlacement(int cost)
+    public void BeginBuildingPlacement(int cost, GameObject buildingToPlace, GameObject buildingToConstruct)
     {
         if(placementBuilding == null)
         {
-            placementBuilding = Instantiate(temporaryBuilding, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
+            placementBuilding = Instantiate(buildingToPlace, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
             //placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
+            constructionBuilding = buildingToConstruct;
             buildingCost = cost;
         }
+    }
+
+    private void resetCurrentBuilding()
+    {
+        Destroy(placementBuilding.gameObject);
+        placementBuilding = null;
+        constructionBuilding = null;
+        buildingCost = 0;
     }
 
     public void CanPlaceBuilding()
@@ -63,4 +74,20 @@ public class BuildingManager : MonoBehaviour
     {
         canPlaceBuilding = false;
     }
+
+    public void RocketBasePlaced()
+    {
+        rocketBasePlaced = true;
+    }
+
+    public void RocketMiddlePlaced()
+    {
+        rocketStageTwo = true;
+    }
+
+    public void RocketTopPlaced()
+    {
+        rocketStageThree = true;
+    }
 }
+
