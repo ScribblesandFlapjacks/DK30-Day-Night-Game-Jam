@@ -6,7 +6,7 @@ public class Buildings : MonoBehaviour
 {
     float buildingStageRate = 5f;
     bool isFinishedProducing = false;
-    int buildingHealth = 100;
+    [SerializeField] float buildingHealth = 100;
     int resourcesProductionRate = 10;
     int storedResources = 0;
     int maxVolume = 50;
@@ -37,16 +37,24 @@ public class Buildings : MonoBehaviour
             storedResources = 0;
         }
 
-        if(storedResources < 20)
+        if(storedResources < (int) Mathf.Round(maxVolume/4))
         {
             buildingIndicator.material.color = new Color32(255, 0, 0, 255);
-        } else if(storedResources < 40)
+        } else if(storedResources < (int) Mathf.Round(maxVolume/2))
         {
             buildingIndicator.material.color = new Color32(255, 255, 0, 255);
-        } else if (storedResources == maxVolume)
+        } else
         {
             buildingIndicator.material.color = new Color32(0, 255, 0, 255);
         }
+
+        if(buildingHealth < 80)
+        {
+            byte alpha = (byte)Mathf.Clamp(Mathf.Round((3 * buildingHealth)),60f,255f);
+            building.material.color = new Color32(255, 255, 255, alpha);
+        }
+
+        maxVolume = (int) Mathf.Clamp(Mathf.Round(buildingHealth / 2), 10f, 100f);
 
         if(buildingHealth < 1)
         {
@@ -77,5 +85,10 @@ public class Buildings : MonoBehaviour
         {
             storedResources += resourcesProductionRate;
         }
+    }
+
+    public void DamageBuilding(float damage)
+    {
+        buildingHealth -= damage;
     }
 }
