@@ -20,7 +20,7 @@ public class LevelWon : MonoBehaviour
 
     IEnumerator NextLevel()
     {
-        yield return new WaitForSeconds(4);
-        startMenu.ChangeSceneTo(2);
+        yield return new WaitForSeconds(2);
+        startMenu.nextLevel();
     }
 }

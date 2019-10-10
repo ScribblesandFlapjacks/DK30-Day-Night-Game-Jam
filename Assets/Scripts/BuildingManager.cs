@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    float circleRadius = 3.8f;
+    float circleRadius;
     int buildingCost;
     bool canPlaceBuilding = true;
     
@@ -17,17 +17,20 @@ public class BuildingManager : MonoBehaviour
     Resources resources;
     CircleMath circleMath;
 
+    int rocketBuildDelay = 10;
     GameObject rocketBasePlaced;
     GameObject rocketStageTwo;
     GameObject rocketStageThree;
     bool blastOff = false;
-    float rocketDistance = 3.5f;
+    float rocketDistance;
 
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         resources = FindObjectOfType<Resources>();
         circleMath = FindObjectOfType<CircleMath>();
+        circleRadius = circleMath.getRadius();
+        rocketDistance = circleMath.getRadius();
     }
 
     private void Update()
@@ -76,6 +79,7 @@ public class BuildingManager : MonoBehaviour
         placementBuilding = null;
         constructionBuilding = null;
         buildingCost = 0;
+        canPlaceBuilding = true;
     }
 
     public void CanPlaceBuilding()
@@ -102,6 +106,11 @@ public class BuildingManager : MonoBehaviour
     {
         rocketStageThree = rocketTop;
         blastOff = true;
+    }
+
+    public int rocketDelay()
+    {
+        return rocketBuildDelay;
     }
 }
 

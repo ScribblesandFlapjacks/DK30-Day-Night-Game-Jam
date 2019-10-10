@@ -32,7 +32,7 @@ public class RocketMiddlePlacement : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
         } else
         {
-            gameObject.transform.position = circleMath.customCirclePosition(4.5f, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + 1, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
     }

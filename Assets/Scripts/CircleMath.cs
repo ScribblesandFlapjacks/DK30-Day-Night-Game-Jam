@@ -17,4 +17,9 @@ public class CircleMath : MonoBehaviour
         float rotationInRadians = Mathf.PI * degree / 180;
         return new Vector2(radius * Mathf.Sin(rotationInRadians), radius * Mathf.Cos(rotationInRadians));
     }
+
+    public float getRadius()
+    {
+        return circleRadius;
+    }
 }

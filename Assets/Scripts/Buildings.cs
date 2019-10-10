@@ -22,6 +22,7 @@ public class Buildings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //GetComponent<AudioSource>().Play();
         resources = FindObjectOfType<Resources>();
         building = GetComponent<Renderer>();
         buildingIndicator = gameObject.transform.Find("BuildingIndicator").GetComponent<Renderer>();

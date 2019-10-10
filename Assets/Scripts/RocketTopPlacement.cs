@@ -34,12 +34,12 @@ public class RocketTopPlacement : MonoBehaviour
         }
         if (touchingRocketBase)
         {
-            gameObject.transform.position = circleMath.customCirclePosition(4.5f, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+1, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
         if(touchingRocketMiddle)
         {
-            gameObject.transform.position = circleMath.customCirclePosition(5.5f, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+2, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
     }

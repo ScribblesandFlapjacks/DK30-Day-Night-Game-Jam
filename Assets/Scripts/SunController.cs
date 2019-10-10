@@ -7,7 +7,7 @@ public class SunController : MonoBehaviour
     float currentRotation = 0.0f;
     [SerializeField]
     float rotationSpeed = 1.0f;
-    float buildingDamageRate = 5.0f;
+    float buildingDamageRate = 3.0f;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         Debug.Log("Sun Trigger Entered");
@@ -15,7 +15,6 @@ public class SunController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Damage");
         if(collision.gameObject.tag == "Building")
         {
             collision.gameObject.GetComponent<Buildings>().DamageBuilding(buildingDamageRate * Time.deltaTime);

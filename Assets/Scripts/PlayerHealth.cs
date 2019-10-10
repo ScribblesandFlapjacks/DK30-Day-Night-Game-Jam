@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    int playerHealth = 100;
+    [SerializeField] Text healthUI;
+    float playerHealth = 100;
     StartMenu startMenu;
 
     private void Start()
@@ -14,12 +16,13 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        healthUI.text = Mathf.RoundToInt(playerHealth).ToString();
         if(playerHealth < 1)
         {
-            startMenu.ChangeSceneTo(3);
+            startMenu.endScreen();
         }
     }
-    public void DamagePlayer(int damage)
+    public void DamagePlayer(float damage)
     {
         playerHealth -= damage;
     }

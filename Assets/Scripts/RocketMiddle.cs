@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class RocketMiddle : MonoBehaviour
 {
+    BuildingManager buildingManager;
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<BuildingManager>().RocketMiddlePlaced(gameObject);
+        buildingManager = FindObjectOfType<BuildingManager>();
+        StartCoroutine(BuildTime());
+    }
+
+    private IEnumerator BuildTime()
+    {
         GameObject.Find("BuildingBar/RocketMiddleUIBlock").GetComponent<BuildingUI>().noLongerPlaceable();
+        gameObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 150);
+        yield return new WaitForSeconds(buildingManager.rocketDelay());
+        gameObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+        gameObject.tag = "RocketPart2";
+        buildingManager.RocketMiddlePlaced(gameObject);
     }
 }
