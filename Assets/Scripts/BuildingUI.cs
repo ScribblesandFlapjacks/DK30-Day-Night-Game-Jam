@@ -17,6 +17,8 @@ public class BuildingUI : MonoBehaviour
     Renderer backgroundColor;
     BuildingManager buildingManager;
 
+    bool canPlace = true;
+
     Color32 unavailableColor = new Color32(165, 175, 175, 100);
     Color32 defaultColor = new Color32(255, 255, 255, 255);
     Color32 unpurchasable = new Color32(255, 0, 0, 255);
@@ -40,20 +42,24 @@ public class BuildingUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (resources.GetCurrentResources() < buildingCost)
+        if (canPlace)
         {
-            buildingUnavailable = true;
-            buildingRenderer.material.color = unavailableColor;
-        } else
-        {
-            buildingUnavailable = false;
-            buildingRenderer.material.color = defaultColor;
-        }
-        if (Input.GetKeyDown(keyCode))
-        {
-            if (IsBuildingPurchasable())
+            if (resources.GetCurrentResources() < buildingCost)
             {
-                buildingManager.BeginBuildingPlacement(buildingCost, placementBuilding, building);
+                buildingUnavailable = true;
+                buildingRenderer.material.color = unavailableColor;
+            }
+            else
+            {
+                buildingUnavailable = false;
+                buildingRenderer.material.color = defaultColor;
+            }
+            if (Input.GetKeyDown(keyCode))
+            {
+                if (IsBuildingPurchasable())
+                {
+                    buildingManager.BeginBuildingPlacement(buildingCost, placementBuilding, building);
+                }
             }
         }
     }
@@ -75,5 +81,11 @@ public class BuildingUI : MonoBehaviour
         backgroundColor.material.color = unpurchasable;
         yield return new WaitForSeconds(.2f);
         backgroundColor.material.color = defaultColor;
+    }
+
+    public void noLongerPlaceable()
+    {
+        canPlace = false;
+        buildingRenderer.material.color = unavailableColor;
     }
 }

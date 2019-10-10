@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2343127806420352747}
   - component: {fileID: -4025725480454241806}
   - component: {fileID: -5776312508866608757}
+  - component: {fileID: 1819901394}
+  - component: {fileID: 1819901395}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2caeac8408dc67446905664d9c0dca45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a24e08070f23414a8179af2fe3dd781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 50
+  playerSpeed: 40
 --- !u!95 &2343127806420352747
 Animator:
   serializedVersion: 3
@@ -163,3 +165,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.625, y: 0.625}
   m_EdgeRadius: 0
+--- !u!114 &1819901394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343127806420352727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bbcf3e26c27fd42aa76398869f37fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTemperature: 0
+  sunIncreaseTemp: 2
+  sunDecreaseTemp: 2
+  thermometer: {fileID: 0}
+--- !u!114 &1819901395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343127806420352727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2608361b664851140b01369a46d361b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUI: {fileID: 0}

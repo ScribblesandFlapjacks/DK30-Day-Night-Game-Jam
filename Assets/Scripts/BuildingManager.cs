@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    float circleRadius = 3.8f;
+    float circleRadius;
     int buildingCost;
     bool canPlaceBuilding = true;
     
@@ -15,15 +15,22 @@ public class BuildingManager : MonoBehaviour
     GameObject constructionBuilding;
     PlayerMovement playerMovement;
     Resources resources;
+    CircleMath circleMath;
 
-    bool rocketBasePlaced = false;
-    bool rocketStageTwo = false;
-    bool rocketStageThree = false;
+    int rocketBuildDelay = 10;
+    GameObject rocketBasePlaced;
+    GameObject rocketStageTwo;
+    GameObject rocketStageThree;
+    bool blastOff = false;
+    float rocketDistance;
 
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         resources = FindObjectOfType<Resources>();
+        circleMath = FindObjectOfType<CircleMath>();
+        circleRadius = circleMath.getRadius();
+        rocketDistance = circleMath.getRadius();
     }
 
     private void Update()
@@ -42,6 +49,15 @@ public class BuildingManager : MonoBehaviour
             {
                 resetCurrentBuilding();
             }
+        }
+
+        if (blastOff)
+        {
+            Destroy(GameObject.Find("PlayerAvatar"));
+            rocketDistance += Time.deltaTime;
+            rocketBasePlaced.transform.position = circleMath.customCirclePosition(rocketDistance, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageTwo.transform.position = circleMath.customCirclePosition(rocketDistance + 1f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageThree.transform.position = circleMath.customCirclePosition(rocketDistance + 2f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
         }
     }
 
@@ -63,6 +79,7 @@ public class BuildingManager : MonoBehaviour
         placementBuilding = null;
         constructionBuilding = null;
         buildingCost = 0;
+        canPlaceBuilding = true;
     }
 
     public void CanPlaceBuilding()
@@ -75,19 +92,25 @@ public class BuildingManager : MonoBehaviour
         canPlaceBuilding = false;
     }
 
-    public void RocketBasePlaced()
+    public void RocketBasePlaced(GameObject rocketBase)
     {
-        rocketBasePlaced = true;
+        rocketBasePlaced = rocketBase;
     }
 
-    public void RocketMiddlePlaced()
+    public void RocketMiddlePlaced(GameObject rocketMiddle)
     {
-        rocketStageTwo = true;
+        rocketStageTwo = rocketMiddle;
     }
 
-    public void RocketTopPlaced()
+    public void RocketTopPlaced(GameObject rocketTop)
     {
-        rocketStageThree = true;
+        rocketStageThree = rocketTop;
+        blastOff = true;
+    }
+
+    public int rocketDelay()
+    {
+        return rocketBuildDelay;
     }
 }
 

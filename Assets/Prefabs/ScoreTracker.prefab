@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9129258274965982320
+--- !u!1 &5343620596455636650
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8564884862921798602}
-  - component: {fileID: 536078662822118182}
+  - component: {fileID: 5343620596455636652}
+  - component: {fileID: 5343620596455636651}
   m_Layer: 0
-  m_Name: CircleMath
+  m_Name: ScoreTracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8564884862921798602
+--- !u!4 &5343620596455636652
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129258274965982320}
+  m_GameObject: {fileID: 5343620596455636650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32363993, y: 0.07614521, z: -10}
+  m_LocalPosition: {x: 6.1480165, y: 4.085548, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &536078662822118182
+--- !u!114 &5343620596455636651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9129258274965982320}
+  m_GameObject: {fileID: 5343620596455636650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6bfe84de4c992a449998c27e495ff53, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c95fcbf8990d4488d7b8fe78d13c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleRadius: 2.8
+  levelScoreDefault: 1000

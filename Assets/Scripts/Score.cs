@@ -1,23 +1,69 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] int currentScore = 0;
+    bool isScoring = true;
 
-    public void IncreaseScore(int scoreToIncreaseBy)
+    int levelScore;
+    [SerializeField] int levelScoreDefault = 1000;
+
+    int totalScore = 0;
+    int totalScoreTemp;
+
+    int decrementScore = 25;
+
+    private void Awake()
     {
-        currentScore += scoreToIncreaseBy;
+        int otherInstances = FindObjectsOfType<Score>().Length;
+        if(otherInstances > 1)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        } else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    public void DecreaseScore(int scoreToDecreaseBy)
+    private void Start()
     {
-        currentScore -= scoreToDecreaseBy;
+        levelScore = levelScoreDefault;
+        totalScoreTemp = totalScore + levelScore;
+        InvokeRepeating("DecreaseScore", 10f, 10f);
     }
 
-    public int GetCurrentScore()
+    private void Update()
     {
-        return currentScore;
+        totalScoreTemp = totalScore + levelScore;
     }
+
+    private void DecreaseScore()
+    {
+        levelScore = Mathf.Clamp(levelScore -= decrementScore,0,levelScoreDefault);
+    }
+
+    public void resetParameters()
+    {
+        totalScore = totalScoreTemp;
+        levelScore = levelScoreDefault;
+    }
+
+    public int getScore()
+    {
+        return totalScore;
+    }
+
+    public int GetLevelScore()
+    {
+        return levelScore;
+    }
+
+    public int GetTotalScore()
+    {
+        return totalScoreTemp;
+    }
+
 }

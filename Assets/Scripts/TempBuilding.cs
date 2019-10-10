@@ -9,7 +9,6 @@ public class TempBuilding : MonoBehaviour
     BuildingManager buildingManager;
     PlayerMovement playerMovement;
     CircleMath circleMath;
-    float circleRadius = 3.8f;
 
     int numberOfCollisions = 0;
 
@@ -29,7 +28,7 @@ public class TempBuilding : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Building" || collision.gameObject.tag == "RocketPart")
+        if(collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete")
         {
             numberOfCollisions++;
             renderer.material.color = new Color32(255, 0, 0, 150);
@@ -39,7 +38,7 @@ public class TempBuilding : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "RocketPart")
+        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete")
         {
             numberOfCollisions--;
             if(numberOfCollisions == 0)
