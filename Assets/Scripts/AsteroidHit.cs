@@ -6,6 +6,8 @@ public class AsteroidHit : MonoBehaviour
 {
     float startPosition;
     int asteroidDamageOnHit = 20;
+
+    float velocity;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Building")
@@ -21,6 +23,16 @@ public class AsteroidHit : MonoBehaviour
     public void setStartPosition(float position)
     {
         startPosition = position;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        velocity = speed;
+    }
+
+    public float GetSpeed()
+    {
+        return velocity;
     }
 
     public float returnStartPosition()

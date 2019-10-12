@@ -6,13 +6,41 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 50;
     float currentRotation = 0;
-    float circleRadius = 3.5f;
+    bool nextToRocket = false;
+    bool readyToFly = false;
+
+    BuildingManager buildingManager;
 
     CircleMath circleMath;
 
     private void Start()
     {
         circleMath = FindObjectOfType<CircleMath>();
+        buildingManager = FindObjectOfType<BuildingManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && nextToRocket && buildingManager.BlastOffReady())
+        {
+            readyToFly = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "RocketPart")
+        {
+            nextToRocket = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "RocketPart")
+        {
+            nextToRocket = false;
+        }
     }
     public void MoveCounterclockwise()
     {
@@ -43,5 +71,10 @@ public class PlayerMovement : MonoBehaviour
     public Quaternion GetCurrentRotationQuaternion()
     {
         return transform.rotation;
+    }
+
+    public bool ReadyToFly()
+    {
+        return readyToFly;
     }
 }

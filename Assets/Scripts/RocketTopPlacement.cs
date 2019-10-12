@@ -21,7 +21,7 @@ public class RocketTopPlacement : MonoBehaviour
         buildingManager = FindObjectOfType<BuildingManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         circleMath = FindObjectOfType<CircleMath>();
-        renderer.material.color = new Color32(255, 0, 0, 150);
+        renderer.material.color = new Color32(255, 0, 0, 180);
         buildingManager.CantPlaceBuilding();
     }
 
@@ -34,12 +34,12 @@ public class RocketTopPlacement : MonoBehaviour
         }
         if (touchingRocketBase)
         {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+1, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+.75f, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
         if(touchingRocketMiddle)
         {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+2, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+1.5f, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
     }
@@ -55,7 +55,7 @@ public class RocketTopPlacement : MonoBehaviour
         {
             touchingRocketMiddle = true;
             buildingManager.CanPlaceBuilding();
-            renderer.material.color = new Color32(255, 255, 255, 150);
+            renderer.material.color = new Color32(255, 255, 255, 180);
         }
     }
 }

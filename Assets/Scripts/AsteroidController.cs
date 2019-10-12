@@ -6,7 +6,6 @@ public class AsteroidController : MonoBehaviour
 {
     float asteroidFrequency;
     [SerializeField] float asteroidFrequencyDefault;
-    float asteroidSpeed = 5f;
     [SerializeField] GameObject asteroid;
     List<GameObject> asteroids = new List<GameObject>();
 
@@ -38,10 +37,11 @@ public class AsteroidController : MonoBehaviour
     {
         for(int i = 0; i < asteroids.Count; i++)
         {
-            Debug.Log("Yup");
-            float currentDistance = asteroids[i].GetComponent<AsteroidHit>().returnStartPosition();
-            asteroids[i].transform.position = circleMath.customCirclePosition(currentDistance - Time.deltaTime * asteroidSpeed,-asteroids[i].transform.rotation.eulerAngles.z);
-            asteroids[i].GetComponent<AsteroidHit>().setStartPosition(currentDistance - Time.deltaTime * asteroidSpeed);
+            AsteroidHit asteroidHit = asteroids[i].GetComponent<AsteroidHit>();
+            float currentDistance = asteroidHit.returnStartPosition();
+            float speed = asteroidHit.GetSpeed();
+            asteroids[i].transform.position = circleMath.customCirclePosition(currentDistance - Time.deltaTime * speed,-asteroids[i].transform.rotation.eulerAngles.z);
+            asteroids[i].GetComponent<AsteroidHit>().setStartPosition(currentDistance - Time.deltaTime * speed);
             if (currentDistance < circleMath.getRadius())
             {
                 Destroy(asteroids[i].gameObject);
@@ -54,7 +54,9 @@ public class AsteroidController : MonoBehaviour
     {
         float randomAngle = Random.Range(0f, 360f);
         GameObject tempAsteroid = Instantiate(asteroid, circleMath.customCirclePosition(10f, randomAngle), Quaternion.Euler(0,0,randomAngle));
-        tempAsteroid.GetComponent<AsteroidHit>().setStartPosition(10f);
+        AsteroidHit asteroidHit = tempAsteroid.GetComponent<AsteroidHit>();
+        asteroidHit.setStartPosition(10f);
+        asteroidHit.SetSpeed(Random.Range(3f, 5f));
         asteroids.Add(tempAsteroid);
     }
 

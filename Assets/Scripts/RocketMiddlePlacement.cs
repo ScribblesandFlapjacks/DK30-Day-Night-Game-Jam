@@ -20,7 +20,7 @@ public class RocketMiddlePlacement : MonoBehaviour
         buildingManager = FindObjectOfType<BuildingManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         circleMath = FindObjectOfType<CircleMath>();
-        renderer.material.color = new Color32(255, 0, 0, 150);
+        renderer.material.color = new Color32(255, 0, 0, 180);
         buildingManager.CantPlaceBuilding();
     }
 
@@ -32,7 +32,7 @@ public class RocketMiddlePlacement : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
         } else
         {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + 1, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + .75f, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
     }
@@ -44,7 +44,7 @@ public class RocketMiddlePlacement : MonoBehaviour
             rocketBase = collision.gameObject;
             touchingRocketBase = true;
             buildingManager.CanPlaceBuilding();
-            renderer.material.color = new Color32(255, 255, 255, 150);
+            renderer.material.color = new Color32(255, 255, 255, 180);
         }
     }
 
@@ -55,7 +55,7 @@ public class RocketMiddlePlacement : MonoBehaviour
             rocketBase = null;
             touchingRocketBase = false;
             buildingManager.CantPlaceBuilding();
-            renderer.material.color = new Color32(255, 0, 0, 150);
+            renderer.material.color = new Color32(255, 0, 0, 180);
         }
     }
 }

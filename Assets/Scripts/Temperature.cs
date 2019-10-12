@@ -38,12 +38,15 @@ public class Temperature : MonoBehaviour
     private void Update()
     {
         thermometer.value = currentTemperature;
-        if(currentTemperature > 30 && currentTemperature < 40)
+        if(currentTemperature > 20 && currentTemperature < 30)
         {
             playerHealth.DamagePlayer(Time.deltaTime);
-        } else if(currentTemperature > 40)
+        } else if(currentTemperature > 30 && currentTemperature < 40)
         {
             playerHealth.DamagePlayer(Time.deltaTime*2);
+        } else if(currentTemperature > 40)
+        {
+            playerHealth.DamagePlayer(Time.deltaTime*3);
         }
         if(currentTemperature < -30 && currentTemperature > -40)
         {

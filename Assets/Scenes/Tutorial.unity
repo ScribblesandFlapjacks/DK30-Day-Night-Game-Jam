@@ -154,8 +154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 137.78}
-  m_SizeDelta: {x: 192.5, y: 186.8}
+  m_AnchoredPosition: {x: -96.25001, y: 126.140045}
+  m_SizeDelta: {x: 192.5, y: 180.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191229101
 MonoBehaviour:
@@ -198,11 +198,13 @@ MonoBehaviour:
 
     4
 
-    Left Mouse or Space Bar
+    Space Bar
 
     E
 
-    Escape'
+    Escape
+
+    LeftAlt + Q'
 --- !u!222 &191229102
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -401,8 +403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -228.5, y: -77.4}
-  m_SizeDelta: {x: 429.95, y: 161.64}
+  m_AnchoredPosition: {x: -193.20003, y: -90.8}
+  m_SizeDelta: {x: 386.5, y: 188.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581321961
 MonoBehaviour:
@@ -774,8 +776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235.5, y: -73.7}
-  m_SizeDelta: {x: 401.61, y: 134.15}
+  m_AnchoredPosition: {x: 208.6, y: -82.425}
+  m_SizeDelta: {x: 365.3, y: 151.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131181199
 MonoBehaviour:
@@ -857,7 +859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220.5, y: 220}
+  m_AnchoredPosition: {x: 194.68, y: 201.41003}
   m_SizeDelta: {x: 171.6, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1186191819
@@ -934,7 +936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 221.81, y: 126.14}
+  m_AnchoredPosition: {x: 194.68, y: 114.76}
   m_SizeDelta: {x: 337.46, y: 143.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201332120
@@ -1030,7 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1188,8 +1190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -347.4, y: 137.68}
-  m_SizeDelta: {x: 189.1, y: 186.6}
+  m_AnchoredPosition: {x: -291.37, y: 127.26003}
+  m_SizeDelta: {x: 190.18, y: 178.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083487485
 MonoBehaviour:
@@ -1234,9 +1236,11 @@ MonoBehaviour:
 
     Confirm Construction
 
-    Retrieve Resources
+    Interact
 
     End Building Placement
+
+    Quit Run
 
 '
 --- !u!222 &2083487486

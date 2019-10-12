@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject playerAvatar;
     Animator animator;
     PlayerMovement playerMovement;
+    StartMenu sceneControl;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = playerAvatar.GetComponent<Animator>();
         playerMovement = playerAvatar.GetComponent<PlayerMovement>();
+        sceneControl = FindObjectOfType<StartMenu>();
         //playerMovement = FindObjectOfType<PlayerMovement>();
         //buildingUI = FindObjectOfType<BuildingUI>();
         //buildingManager = FindObjectOfType<BuildingManager>();
@@ -34,6 +36,10 @@ public class PlayerController : MonoBehaviour
         }
         if(!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))){
             animator.SetBool("isWalking", false);
+        }
+        if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.Q))
+        {
+            sceneControl.endScreen();
         }
     }
 }

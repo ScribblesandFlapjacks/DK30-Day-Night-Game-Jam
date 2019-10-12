@@ -39,7 +39,7 @@ public class BuildingManager : MonoBehaviour
         if(placementBuilding != null)
         {
             //If the player left clicks and there are no building placement conflicts create a building object in the current position and destroy the temporary building
-            if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
+            if (Input.GetKeyDown(KeyCode.Space) && canPlaceBuilding)
             {
                 Instantiate(constructionBuilding, placementBuilding.transform.position, placementBuilding.transform.rotation);
                 resources.DecreaseResources(buildingCost);
@@ -51,13 +51,13 @@ public class BuildingManager : MonoBehaviour
             }
         }
 
-        if (blastOff)
+        if (blastOff && playerMovement.ReadyToFly())
         {
             Destroy(GameObject.Find("PlayerAvatar"));
             rocketDistance += Time.deltaTime;
             rocketBasePlaced.transform.position = circleMath.customCirclePosition(rocketDistance, -rocketBasePlaced.transform.rotation.eulerAngles.z);
-            rocketStageTwo.transform.position = circleMath.customCirclePosition(rocketDistance + 1f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
-            rocketStageThree.transform.position = circleMath.customCirclePosition(rocketDistance + 2f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageTwo.transform.position = circleMath.customCirclePosition(rocketDistance + .75f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageThree.transform.position = circleMath.customCirclePosition(rocketDistance + 1.5f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
         }
     }
 
@@ -111,6 +111,11 @@ public class BuildingManager : MonoBehaviour
     public int rocketDelay()
     {
         return rocketBuildDelay;
+    }
+
+    public bool BlastOffReady()
+    {
+        return blastOff;
     }
 }
 
