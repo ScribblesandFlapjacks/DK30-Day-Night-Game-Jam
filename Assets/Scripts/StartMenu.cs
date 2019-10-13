@@ -34,7 +34,7 @@ public class StartMenu : MonoBehaviour
     public void endScreen()
     {
         Destroy(asteroidController);
-        score.resetParameters();
+        score.finalResults();
         SceneManager.LoadScene(3);
     }
 

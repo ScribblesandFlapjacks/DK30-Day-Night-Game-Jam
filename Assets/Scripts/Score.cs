@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class Score : MonoBehaviour
     int totalScoreTemp;
 
     int decrementScore = 25;
+
+    int level = 1;
 
     private void Awake()
     {
@@ -49,6 +50,12 @@ public class Score : MonoBehaviour
     {
         totalScore = totalScoreTemp;
         levelScore = levelScoreDefault;
+        level += 1;
+    }
+
+    public void finalResults()
+    {
+        totalScore = totalScoreTemp;
     }
 
     public int getScore()
@@ -64,6 +71,11 @@ public class Score : MonoBehaviour
     public int GetTotalScore()
     {
         return totalScoreTemp;
+    }
+
+    public int GetLevel()
+    {
+        return level;
     }
 
 }
