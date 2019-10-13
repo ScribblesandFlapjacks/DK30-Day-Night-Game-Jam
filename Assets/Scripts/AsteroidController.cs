@@ -62,6 +62,9 @@ public class AsteroidController : MonoBehaviour
 
     public void IncreaseDifficulty()
     {
-        asteroidFrequency = Mathf.Clamp(asteroidFrequency -= 2f,0,20);
+        CancelInvoke();
+        asteroids.Clear();
+        asteroidFrequency = Mathf.Clamp(asteroidFrequency -= 2f,1,20);
+        InvokeRepeating("LobAsteroid", 15f, asteroidFrequency);
     }
 }
