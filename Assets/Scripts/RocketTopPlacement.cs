@@ -34,13 +34,16 @@ public class RocketTopPlacement : MonoBehaviour
         }
         if (touchingRocketBase)
         {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+.75f, -rocketBase.transform.rotation.eulerAngles.z);
-            gameObject.transform.rotation = rocketBase.transform.rotation;
-        }
-        if(touchingRocketMiddle)
-        {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius()+1.5f, -rocketBase.transform.rotation.eulerAngles.z);
-            gameObject.transform.rotation = rocketBase.transform.rotation;
+            if (!buildingManager.IsRocketMiddlePlaced())
+            {
+                gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + 1.5f, -rocketBase.transform.rotation.eulerAngles.z);
+                gameObject.transform.rotation = rocketBase.transform.rotation;
+                buildingManager.CanPlaceBuilding();
+            } else
+            {
+                gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
+            }
         }
     }
 
@@ -50,12 +53,6 @@ public class RocketTopPlacement : MonoBehaviour
         {
             rocketBase = collision.gameObject;
             touchingRocketBase = true;
-        }
-        if(collision.gameObject.tag == "RocketPart2")
-        {
-            touchingRocketMiddle = true;
-            buildingManager.CanPlaceBuilding();
-            renderer.material.color = new Color32(255, 255, 255, 180);
         }
     }
 }

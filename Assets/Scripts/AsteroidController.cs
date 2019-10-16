@@ -7,6 +7,7 @@ public class AsteroidController : MonoBehaviour
     float asteroidFrequency;
     [SerializeField] float asteroidFrequencyDefault;
     [SerializeField] GameObject asteroid;
+    [SerializeField] GameObject explosion;
     List<GameObject> asteroids = new List<GameObject>();
 
     CircleMath circleMath;
@@ -44,6 +45,8 @@ public class AsteroidController : MonoBehaviour
             asteroids[i].GetComponent<AsteroidHit>().setStartPosition(currentDistance - Time.deltaTime * speed);
             if (currentDistance < circleMath.getRadius())
             {
+                GameObject explosionHolder = Instantiate(explosion, asteroids[i].gameObject.transform.position, asteroids[i].gameObject.transform.rotation);
+                Destroy(explosionHolder, 0.3f);
                 Destroy(asteroids[i].gameObject);
                 asteroids.RemoveAt(i);
             }

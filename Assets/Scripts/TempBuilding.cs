@@ -23,12 +23,12 @@ public class TempBuilding : MonoBehaviour
     private void Update()
     {
         gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree() + 5));
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete")
+        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete" || collision.gameObject.tag == "RocketPart")
         {
             numberOfCollisions++;
             renderer.material.color = new Color32(255, 0, 0, 150);
@@ -38,7 +38,7 @@ public class TempBuilding : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete")
+        if (collision.gameObject.tag == "Building" || collision.gameObject.tag == "Incomplete" || collision.gameObject.tag == "RocketPart")
         {
             numberOfCollisions--;
             if(numberOfCollisions == 0)

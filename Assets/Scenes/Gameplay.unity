@@ -429,6 +429,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 41475130, guid: 8b4751c1ec307cd44b9ac27d9859198d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.027314186
+      objectReference: {fileID: 0}
+    - target: {fileID: 41475130, guid: 8b4751c1ec307cd44b9ac27d9859198d, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.9756864
+      objectReference: {fileID: 0}
+    - target: {fileID: 41475130, guid: 8b4751c1ec307cd44b9ac27d9859198d, type: 3}
+      propertyPath: m_Size.y
+      value: 3.765146
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b4751c1ec307cd44b9ac27d9859198d, type: 3}
 --- !u!1001 &883938727
@@ -507,6 +519,10 @@ PrefabInstance:
       propertyPath: thermometer
       value: 
       objectReference: {fileID: 251876578}
+    - target: {fileID: 1819901394, guid: 1d2f0c05fb4990b429b0dbfe65bf9097, type: 3}
+      propertyPath: sunIncreaseTemp
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1819901395, guid: 1d2f0c05fb4990b429b0dbfe65bf9097, type: 3}
       propertyPath: healthUI
       value: 
@@ -1583,6 +1599,12 @@ PrefabInstance:
       propertyPath: asteroidFrequencyDefault
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5632082317701988817, guid: 86c7cd7c718dc3f48a6795b4c168ca13,
+        type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 8438310390690756497, guid: 2a0516a9b79cf86419f2046fca9dc289,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86c7cd7c718dc3f48a6795b4c168ca13, type: 3}
 --- !u!1001 &7555288478859878718
@@ -1657,6 +1679,11 @@ PrefabInstance:
       propertyPath: currentResourcesUI
       value: 
       objectReference: {fileID: 1821652059}
+    - target: {fileID: 7555288480548823193, guid: 15eab481051fa4b43a6fbdca95a9a546,
+        type: 3}
+      propertyPath: currentResources
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15eab481051fa4b43a6fbdca95a9a546, type: 3}
 --- !u!1001 &7741364132022941579

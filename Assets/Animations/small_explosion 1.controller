@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1107 &-2146692303903292117
+--- !u!1107 &-2907471975954841371
 AnimatorStateMachine:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -10,31 +10,31 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 5944033423062077704}
-    m_Position: {x: 280, y: 20, z: 0}
+    m_State: {fileID: 1633762162469014450}
+    m_Position: {x: 370, y: 130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 250, y: -60, z: 0}
-  m_EntryPosition: {x: 210, y: 150, z: 0}
-  m_ExitPosition: {x: 500, y: 160, z: 0}
+  m_AnyStatePosition: {x: 380, y: 0, z: 0}
+  m_EntryPosition: {x: 140, y: 250, z: 0}
+  m_ExitPosition: {x: 720, y: 140, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 5944033423062077704}
+  m_DefaultState: {fileID: 1633762162469014450}
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: small_explosion
+  m_Name: small_explosion 1
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: -2146692303903292117}
+    m_StateMachine: {fileID: -2907471975954841371}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -44,14 +44,14 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &5944033423062077704
+--- !u!1102 &1633762162469014450
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Meteor
+  m_Name: Meteor2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -64,7 +64,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6a1410d109d33d648b683e614c4b8f85, type: 2}
+  m_Motion: {fileID: 7400000, guid: 641211b2b6f06e04dacf009161258db2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

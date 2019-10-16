@@ -53,6 +53,7 @@ public class BuildingManager : MonoBehaviour
 
         if (blastOff && playerMovement.ReadyToFly())
         {
+            resetCurrentBuilding();
             Destroy(GameObject.Find("PlayerAvatar"));
             rocketDistance += Time.deltaTime;
             rocketBasePlaced.transform.position = circleMath.customCirclePosition(rocketDistance, -rocketBasePlaced.transform.rotation.eulerAngles.z);
@@ -64,18 +65,18 @@ public class BuildingManager : MonoBehaviour
     //Creates a temporaryBuilding for building placement visualization
     public void BeginBuildingPlacement(int cost, GameObject buildingToPlace, GameObject buildingToConstruct)
     {
-        if(placementBuilding == null)
-        {
-            placementBuilding = Instantiate(buildingToPlace, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
-            //placementBuilding.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 100);
-            constructionBuilding = buildingToConstruct;
-            buildingCost = cost;
-        }
+        resetCurrentBuilding();
+        placementBuilding = Instantiate(buildingToPlace, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
+        constructionBuilding = buildingToConstruct;
+        buildingCost = cost;
     }
 
     private void resetCurrentBuilding()
     {
-        Destroy(placementBuilding.gameObject);
+        if(placementBuilding != null)
+        {
+            Destroy(placementBuilding.gameObject);
+        }
         placementBuilding = null;
         constructionBuilding = null;
         buildingCost = 0;
@@ -100,6 +101,11 @@ public class BuildingManager : MonoBehaviour
     public void RocketMiddlePlaced(GameObject rocketMiddle)
     {
         rocketStageTwo = rocketMiddle;
+    }
+
+    public bool IsRocketMiddlePlaced()
+    {
+        return rocketStageTwo == null;
     }
 
     public void RocketTopPlaced(GameObject rocketTop)
