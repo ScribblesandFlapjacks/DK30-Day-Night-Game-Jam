@@ -12,23 +12,10 @@ public class AsteroidController : MonoBehaviour
 
     CircleMath circleMath;
 
-    private void Awake()
-    {
-        int otherInstances = FindObjectsOfType<AsteroidController>().Length;
-        if(otherInstances > 1)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
-        asteroidFrequency = asteroidFrequencyDefault;
+        asteroidFrequency = Mathf.Clamp(asteroidFrequencyDefault -= 2f * (FindObjectOfType<SessionManager>().GetLevel() - 1), 2f, asteroidFrequencyDefault);
         circleMath = FindObjectOfType<CircleMath>();
         InvokeRepeating("LobAsteroid", 15f, asteroidFrequency);
     }
@@ -41,9 +28,9 @@ public class AsteroidController : MonoBehaviour
             AsteroidHit asteroidHit = asteroids[i].GetComponent<AsteroidHit>();
             float currentDistance = asteroidHit.returnStartPosition();
             float speed = asteroidHit.GetSpeed();
-            asteroids[i].transform.position = circleMath.customCirclePosition(currentDistance - Time.deltaTime * speed,-asteroids[i].transform.rotation.eulerAngles.z);
+            asteroids[i].transform.position = circleMath.CustomCirclePosition(currentDistance - Time.deltaTime * speed,-asteroids[i].transform.rotation.eulerAngles.z);
             asteroids[i].GetComponent<AsteroidHit>().setStartPosition(currentDistance - Time.deltaTime * speed);
-            if (currentDistance < circleMath.getRadius())
+            if (currentDistance < circleMath.GetRadius())
             {
                 GameObject explosionHolder = Instantiate(explosion, asteroids[i].gameObject.transform.position, asteroids[i].gameObject.transform.rotation);
                 Destroy(explosionHolder, 0.3f);
@@ -56,18 +43,10 @@ public class AsteroidController : MonoBehaviour
     private void LobAsteroid()
     {
         float randomAngle = Random.Range(0f, 360f);
-        GameObject tempAsteroid = Instantiate(asteroid, circleMath.customCirclePosition(10f, randomAngle), Quaternion.Euler(0,0,randomAngle));
+        GameObject tempAsteroid = Instantiate(asteroid, circleMath.CustomCirclePosition(10f, randomAngle), Quaternion.Euler(0,0,randomAngle));
         AsteroidHit asteroidHit = tempAsteroid.GetComponent<AsteroidHit>();
         asteroidHit.setStartPosition(10f);
         asteroidHit.SetSpeed(Random.Range(3f, 5f));
         asteroids.Add(tempAsteroid);
-    }
-
-    public void IncreaseDifficulty()
-    {
-        CancelInvoke();
-        asteroids.Clear();
-        asteroidFrequency = Mathf.Clamp(asteroidFrequency -= 2f,1,20);
-        InvokeRepeating("LobAsteroid", 15f, asteroidFrequency);
     }
 }

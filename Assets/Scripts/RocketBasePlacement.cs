@@ -22,7 +22,7 @@ public class RocketBasePlacement : MonoBehaviour
 
     private void Update()
     {
-        gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
+        gameObject.transform.position = circleMath.PositionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
         gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
     }
 

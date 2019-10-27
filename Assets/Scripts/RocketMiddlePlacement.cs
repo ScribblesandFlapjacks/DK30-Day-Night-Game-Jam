@@ -28,11 +28,11 @@ public class RocketMiddlePlacement : MonoBehaviour
     {
         if (!touchingRocketBase)
         {
-            gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
+            gameObject.transform.position = circleMath.PositionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
         } else
         {
-            gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + .75f, -rocketBase.transform.rotation.eulerAngles.z);
+            gameObject.transform.position = circleMath.CustomCirclePosition(circleMath.GetRadius() + .75f, -rocketBase.transform.rotation.eulerAngles.z);
             gameObject.transform.rotation = rocketBase.transform.rotation;
         }
     }

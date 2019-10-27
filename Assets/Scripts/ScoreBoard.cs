@@ -7,17 +7,17 @@ public class ScoreBoard : MonoBehaviour
 {
     [SerializeField] Text levelScore;
     [SerializeField] Text totalScore;
-    Score score;
+    SessionManager sessionManager;
     // Start is called before the first frame update
     void Start()
     {
-        score = FindObjectOfType<Score>();
+        sessionManager = FindObjectOfType<SessionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        levelScore.text = score.GetLevelScore().ToString();
-        totalScore.text = score.GetTotalScore().ToString();
+        levelScore.text = sessionManager.GetLevelScore().ToString();
+        totalScore.text = sessionManager.GetTotalScore().ToString();
     }
 }

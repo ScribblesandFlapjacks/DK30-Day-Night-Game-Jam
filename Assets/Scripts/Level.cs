@@ -9,6 +9,6 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelUI.text = "Level: " + FindObjectOfType<Score>().GetLevel();
+        levelUI.text = "Level: " + FindObjectOfType<SessionManager>().GetLevel();
     }
 }

@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartMenu : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
-    AsteroidController asteroidController;
-    Score score;
+    SessionManager sessionManager;
 
     private void Start()
     {
-        asteroidController = FindObjectOfType<AsteroidController>();
-        score = FindObjectOfType<Score>();
+        sessionManager = FindObjectOfType<SessionManager>();
     }
     public void ChangeSceneTo(int scene)
     {
@@ -20,21 +18,19 @@ public class StartMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        Destroy(score);
+        Destroy(sessionManager);
         SceneManager.LoadScene(2);
     }
 
     public void nextLevel()
     {
-        asteroidController.IncreaseDifficulty();
-        score.resetParameters();
+        sessionManager.NextLevel();
         SceneManager.LoadScene(2);
     }
 
     public void endScreen()
     {
-        Destroy(asteroidController);
-        score.finalResults();
+        sessionManager.FinalResults();
         SceneManager.LoadScene(3);
     }
 

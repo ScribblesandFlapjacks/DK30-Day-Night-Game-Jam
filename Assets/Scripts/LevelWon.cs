@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LevelWon : MonoBehaviour
 {
-    StartMenu startMenu;
+    SceneLoader startMenu;
 
     private void Start()
     {
-        startMenu = FindObjectOfType<StartMenu>();
+        startMenu = FindObjectOfType<SceneLoader>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

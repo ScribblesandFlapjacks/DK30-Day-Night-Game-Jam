@@ -7,11 +7,11 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Text healthUI;
     float playerHealth = 100;
-    StartMenu startMenu;
+    SceneLoader startMenu;
 
     private void Start()
     {
-        startMenu = FindObjectOfType<StartMenu>();
+        startMenu = FindObjectOfType<SceneLoader>();
     }
 
     private void Update()

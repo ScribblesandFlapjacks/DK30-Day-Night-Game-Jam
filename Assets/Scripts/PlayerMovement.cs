@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveCounterclockwise()
     {
         currentRotation -= Time.deltaTime * playerSpeed;
-        transform.position = circleMath.positionOnCirclePerimeter(currentRotation);
+        transform.position = circleMath.PositionOnCirclePerimeter(currentRotation);
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
         GetComponent<SpriteRenderer>().flipX = false;
     }
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveClockwise()
     {
         currentRotation += Time.deltaTime * playerSpeed;
-        transform.position = circleMath.positionOnCirclePerimeter(currentRotation);
+        transform.position = circleMath.PositionOnCirclePerimeter(currentRotation);
         transform.rotation = Quaternion.Euler(0, 0, -currentRotation);
         GetComponent<SpriteRenderer>().flipX = true;
     }

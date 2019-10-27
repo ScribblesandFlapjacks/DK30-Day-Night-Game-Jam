@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject playerAvatar;
     Animator animator;
     PlayerMovement playerMovement;
-    StartMenu sceneControl;
+    SceneLoader sceneControl;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = playerAvatar.GetComponent<Animator>();
         playerMovement = playerAvatar.GetComponent<PlayerMovement>();
-        sceneControl = FindObjectOfType<StartMenu>();
+        sceneControl = FindObjectOfType<SceneLoader>();
         //playerMovement = FindObjectOfType<PlayerMovement>();
         //buildingUI = FindObjectOfType<BuildingUI>();
         //buildingManager = FindObjectOfType<BuildingManager>();

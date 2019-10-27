@@ -10,8 +10,8 @@ public class FinalScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Score score = FindObjectOfType<Score>();
-        finalLevel.text = "You Died On Level: " + score.GetLevel();
-        finalScore.text = "Final Score: " + score.getScore().ToString();
+        SessionManager sessionManager = FindObjectOfType<SessionManager>();
+        finalLevel.text = "You Died On Level: " + sessionManager.GetLevel();
+        finalScore.text = "Final Score: " + sessionManager.GetScore().ToString();
     }
 }

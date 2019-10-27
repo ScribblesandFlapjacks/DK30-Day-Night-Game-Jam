@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Score : MonoBehaviour
+public class SessionManager : MonoBehaviour
 {
     bool isScoring = true;
 
@@ -18,7 +18,7 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
-        int otherInstances = FindObjectsOfType<Score>().Length;
+        int otherInstances = FindObjectsOfType<SessionManager>().Length;
         if(otherInstances > 1)
         {
             gameObject.SetActive(false);
@@ -33,7 +33,6 @@ public class Score : MonoBehaviour
     {
         levelScore = levelScoreDefault;
         totalScoreTemp = totalScore + levelScore;
-        InvokeRepeating("DecreaseScore", 10f, 10f);
     }
 
     private void Update()
@@ -46,19 +45,29 @@ public class Score : MonoBehaviour
         levelScore = Mathf.Clamp(levelScore -= decrementScore,0,levelScoreDefault);
     }
 
-    public void resetParameters()
+    public void BeginScoring()
+    {
+        InvokeRepeating("DecreaseScore", 10f, 10f);
+    }
+
+    public void PauseScoring()
+    {
+        CancelInvoke();
+    }
+
+    public void NextLevel()
     {
         totalScore = totalScoreTemp;
         levelScore = levelScoreDefault;
         level += 1;
     }
 
-    public void finalResults()
+    public void FinalResults()
     {
         totalScore = totalScoreTemp;
     }
 
-    public int getScore()
+    public int GetScore()
     {
         return totalScore;
     }

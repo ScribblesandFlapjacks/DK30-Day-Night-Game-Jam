@@ -29,19 +29,19 @@ public class RocketTopPlacement : MonoBehaviour
     {
         if (!touchingRocketBase)
         {
-            gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
+            gameObject.transform.position = circleMath.PositionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
         }
         if (touchingRocketBase)
         {
             if (!buildingManager.IsRocketMiddlePlaced())
             {
-                gameObject.transform.position = circleMath.customCirclePosition(circleMath.getRadius() + 1.5f, -rocketBase.transform.rotation.eulerAngles.z);
+                gameObject.transform.position = circleMath.CustomCirclePosition(circleMath.GetRadius() + 1.5f, -rocketBase.transform.rotation.eulerAngles.z);
                 gameObject.transform.rotation = rocketBase.transform.rotation;
                 buildingManager.CanPlaceBuilding();
             } else
             {
-                gameObject.transform.position = circleMath.positionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
+                gameObject.transform.position = circleMath.PositionOnCirclePerimeter(playerMovement.GetCurrentRotationDegree());
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, -(playerMovement.GetCurrentRotationDegree()));
             }
         }

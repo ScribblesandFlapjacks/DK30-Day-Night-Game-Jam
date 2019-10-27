@@ -29,8 +29,8 @@ public class BuildingManager : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         resources = FindObjectOfType<Resources>();
         circleMath = FindObjectOfType<CircleMath>();
-        circleRadius = circleMath.getRadius();
-        rocketDistance = circleMath.getRadius();
+        circleRadius = circleMath.GetRadius();
+        rocketDistance = circleMath.GetRadius();
     }
 
     private void Update()
@@ -56,9 +56,9 @@ public class BuildingManager : MonoBehaviour
             resetCurrentBuilding();
             Destroy(GameObject.Find("PlayerAvatar"));
             rocketDistance += Time.deltaTime;
-            rocketBasePlaced.transform.position = circleMath.customCirclePosition(rocketDistance, -rocketBasePlaced.transform.rotation.eulerAngles.z);
-            rocketStageTwo.transform.position = circleMath.customCirclePosition(rocketDistance + .75f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
-            rocketStageThree.transform.position = circleMath.customCirclePosition(rocketDistance + 1.5f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketBasePlaced.transform.position = circleMath.CustomCirclePosition(rocketDistance, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageTwo.transform.position = circleMath.CustomCirclePosition(rocketDistance + .75f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
+            rocketStageThree.transform.position = circleMath.CustomCirclePosition(rocketDistance + 1.5f, -rocketBasePlaced.transform.rotation.eulerAngles.z);
         }
     }
 
