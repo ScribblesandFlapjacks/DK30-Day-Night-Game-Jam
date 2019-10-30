@@ -9,8 +9,9 @@ public class LevelSetup : MonoBehaviour
     [SerializeField] Text planetSizeUI;
     [SerializeField] int countdown = 10;
     [SerializeField] GameObject[] planets;
-    [SerializeField] GameObject sunOverlay;
+    [SerializeField] GameObject[] sunOverlays;
     [SerializeField] GameObject playerAvatar;
+    [SerializeField] GameObject tunnel;
 
     SessionManager sessionManager;
     CircleMath circleMath;
@@ -27,6 +28,8 @@ public class LevelSetup : MonoBehaviour
         sessionManager = FindObjectOfType<SessionManager>();
         circleMath = FindObjectOfType<CircleMath>();
         RandomizePlanet();
+        RandomizeSun();
+        PlaceTunnels();
         StartCoroutine(BeginCountdown());
     }
 
@@ -41,7 +44,7 @@ public class LevelSetup : MonoBehaviour
         float scale = Random.Range(0.5f, 0.8f);
         GameObject randomPlanet = planets[Random.Range(1, planets.Length)-1];
         Vector3 planetSize = new Vector3(scale, scale, 1);
-        Color32 planetColor = Random.ColorHSV(.75f,1f,.75f,1f,.75f,1f,.75f,1f);
+        Color32 planetColor = Random.ColorHSV(.1f,1f,.75f,1f,.75f,1f,.75f,1f);
         GameObject basePlanet = Instantiate(randomPlanet, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
         basePlanet.GetComponent<Transform>().localScale = planetSize;
         basePlanet.GetComponent<Renderer>().material.color = planetColor;
@@ -50,9 +53,40 @@ public class LevelSetup : MonoBehaviour
         planetUI.GetComponent<Transform>().localScale = planetSize;
         planetUI.GetComponent<Renderer>().material.color = planetColor;
         circleMath.SetRadius(3.5f * scale);
-        sunOverlay.GetComponent<Transform>().localScale = new Vector3(scale, 1f, 1f);
+        sunOverlays[0].transform.Find("PlanetCenter/DaylightOverlay").GetComponent<Transform>().localScale = new Vector3(scale, 1f, 1f);
         playerAvatar.GetComponent<Transform>().position = new Vector2(0f, 3.5f * scale);
         planetSizeUI.text = "Planet Size: " + System.Math.Round((scale * 3.5f * 2f),2).ToString();
+    }
+
+    private void RandomizeSun()
+    {
+        int randomSun = Random.Range(1, sunOverlays.Length + 1);
+        if(randomSun < 2)
+        {
+            sunOverlays[0].gameObject.SetActive(true);
+        }
+        else
+        {
+            sunOverlays[randomSun - 1].gameObject.SetActive(true);
+        }
+    }
+
+    private void PlaceTunnels()
+    {
+        float tunnelOneRotation = Random.Range(0f, 360f);
+        float tunnelTwoRotation = Random.Range(tunnelOneRotation + 90f, 360f + tunnelOneRotation-90f);
+        GameObject tunnelOne = Instantiate(tunnel, circleMath.CustomCirclePosition(circleMath.GetRadius(), tunnelOneRotation), Quaternion.Euler(0, 0, -tunnelOneRotation));
+        GameObject tunnelTwo = Instantiate(tunnel, circleMath.CustomCirclePosition(circleMath.GetRadius(), tunnelTwoRotation), Quaternion.Euler(0, 0, -tunnelTwoRotation));
+        tunnelOne.GetComponent<Tunnel>().SetTunnelLink(tunnelTwo);
+        tunnelOne.GetComponent<Tunnel>().SetRotation(tunnelOneRotation);
+        tunnelTwo.GetComponent<Tunnel>().SetTunnelLink(tunnelOne);
+        if(tunnelTwoRotation > 360f)
+        {
+            tunnelTwo.GetComponent<Tunnel>().SetRotation(tunnelTwoRotation - 360f);
+        } else
+        {
+            tunnelTwo.GetComponent<Tunnel>().SetRotation(tunnelTwoRotation);
+        }
     }
 
     IEnumerator BeginCountdown()

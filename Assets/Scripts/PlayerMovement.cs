@@ -73,6 +73,12 @@ public class PlayerMovement : MonoBehaviour
         return transform.rotation;
     }
 
+    public void SetDegree(float degree)
+    {
+        Debug.Log(degree);
+        currentRotation = degree;
+    }
+
     public bool ReadyToFly()
     {
         return readyToFly;
