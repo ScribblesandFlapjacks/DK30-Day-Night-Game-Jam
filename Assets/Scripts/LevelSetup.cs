@@ -7,9 +7,12 @@ public class LevelSetup : MonoBehaviour
 {
     [SerializeField] Text countdownUI;
     [SerializeField] Text planetSizeUI;
+    [SerializeField] Text[] mutationDescriptors;
     [SerializeField] int countdown = 10;
     [SerializeField] GameObject[] planets;
     [SerializeField] GameObject[] sunOverlays;
+    [SerializeField] GameObject[] buildingBarBlocks;
+    [SerializeField] GameObject[] rocketUI;
     [SerializeField] GameObject playerAvatar;
     [SerializeField] GameObject tunnel;
 
@@ -17,6 +20,7 @@ public class LevelSetup : MonoBehaviour
     CircleMath circleMath;
 
     GameObject planetUI;
+    int buildingBarCurrentPosition = 1;
 
     private void Awake()
     {
@@ -29,14 +33,12 @@ public class LevelSetup : MonoBehaviour
         circleMath = FindObjectOfType<CircleMath>();
         RandomizePlanet();
         RandomizeSun();
-        PlaceTunnels();
+        if(Random.Range(0,4) >= 3)
+        {
+            PlaceTunnels();
+        }
+        RocketUI();
         StartCoroutine(BeginCountdown());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void RandomizePlanet()
@@ -48,7 +50,7 @@ public class LevelSetup : MonoBehaviour
         GameObject basePlanet = Instantiate(randomPlanet, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
         basePlanet.GetComponent<Transform>().localScale = planetSize;
         basePlanet.GetComponent<Renderer>().material.color = planetColor;
-        planetUI = Instantiate(randomPlanet, new Vector3(6f,-1.5f,0f), Quaternion.Euler(0, 0, 0));
+        planetUI = Instantiate(randomPlanet, new Vector3(2f,-1.5f,0f), Quaternion.Euler(0, 0, 0));
         planetUI.GetComponent<Renderer>().sortingOrder = 31;
         planetUI.GetComponent<Transform>().localScale = planetSize;
         planetUI.GetComponent<Renderer>().material.color = planetColor;
@@ -60,7 +62,7 @@ public class LevelSetup : MonoBehaviour
 
     private void RandomizeSun()
     {
-        int randomSun = Random.Range(1, sunOverlays.Length + 1);
+        int randomSun = Random.Range(0, sunOverlays.Length);
         if(randomSun < 2)
         {
             sunOverlays[0].gameObject.SetActive(true);
@@ -68,6 +70,8 @@ public class LevelSetup : MonoBehaviour
         else
         {
             sunOverlays[randomSun - 1].gameObject.SetActive(true);
+            Instantiate(buildingBarBlocks[randomSun - 2], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            buildingBarCurrentPosition += 1;
         }
     }
 
@@ -87,6 +91,28 @@ public class LevelSetup : MonoBehaviour
         {
             tunnelTwo.GetComponent<Tunnel>().SetRotation(tunnelTwoRotation);
         }
+        SetMutationDescriptor("There are tunnels");
+    }
+
+    private void SetMutationDescriptor(string descriptor)
+    {
+        for(int i = 0; i < mutationDescriptors.Length; i++)
+        {
+            if(mutationDescriptors[i].text == "")
+            {
+                mutationDescriptors[i].text = descriptor;
+                break;
+            }
+        }
+    }
+
+    private void RocketUI()
+    {
+        for(int i = 0; i < rocketUI.Length; i++)
+        {
+            Instantiate(rocketUI[i], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            buildingBarCurrentPosition += 1;
+        }
     }
 
     IEnumerator BeginCountdown()
@@ -99,6 +125,7 @@ public class LevelSetup : MonoBehaviour
             {
                 Destroy(gameObject);
                 Destroy(planetUI);
+                playerAvatar.gameObject.SetActive(true);
                 Time.timeScale = 1f;
             }
         }

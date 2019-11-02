@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingUI : MonoBehaviour
 {
     Resources resources;
     bool buildingUnavailable = false;
     [SerializeField] int buildingCost;
+    [SerializeField] Text buildingCostText;
     [SerializeField] KeyCode keyCode;
     [SerializeField] GameObject building;
     [SerializeField] GameObject placementBuilding;
@@ -29,6 +31,7 @@ public class BuildingUI : MonoBehaviour
         buildingManager = FindObjectOfType<BuildingManager>();
         buildingUI = gameObject.transform.Find("TestBuilding");
         background = gameObject.transform.Find("BuildingBarBlock");
+        buildingCostText.text = buildingCost.ToString();
         buildingRenderer = buildingUI.GetComponent<Renderer>();
         backgroundColor = background.GetComponent<Renderer>();
         resources = FindObjectOfType<Resources>();
