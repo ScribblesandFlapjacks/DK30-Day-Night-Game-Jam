@@ -91,4 +91,9 @@ public class BuildingUI : MonoBehaviour
         canPlace = false;
         buildingRenderer.material.color = unavailableColor;
     }
+
+    public void SetKeyCode(KeyCode key)
+    {
+        keyCode = key;
+    }
 }

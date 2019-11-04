@@ -22,6 +22,10 @@ public class LevelSetup : MonoBehaviour
     GameObject planetUI;
     int buildingBarCurrentPosition = 1;
 
+    GameObject chosenSunOverlay;
+
+    KeyCode[] keys = new KeyCode[5] { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6};
+
     private void Awake()
     {
         Time.timeScale = 0f;
@@ -44,13 +48,14 @@ public class LevelSetup : MonoBehaviour
     private void RandomizePlanet()
     {
         float scale = Random.Range(0.5f, 0.8f);
+        float rotation = Random.Range(0f, 360f);
         GameObject randomPlanet = planets[Random.Range(1, planets.Length)-1];
         Vector3 planetSize = new Vector3(scale, scale, 1);
-        Color32 planetColor = Random.ColorHSV(.1f,1f,.75f,1f,.75f,1f,.75f,1f);
-        GameObject basePlanet = Instantiate(randomPlanet, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+        Color32 planetColor = Random.ColorHSV(.1f,1f,.75f,1f,.75f,1f,.9f,1f);
+        GameObject basePlanet = Instantiate(randomPlanet, new Vector2(0, 0), Quaternion.Euler(0, 0, rotation));
         basePlanet.GetComponent<Transform>().localScale = planetSize;
         basePlanet.GetComponent<Renderer>().material.color = planetColor;
-        planetUI = Instantiate(randomPlanet, new Vector3(2f,-1.5f,0f), Quaternion.Euler(0, 0, 0));
+        planetUI = Instantiate(randomPlanet, new Vector3(2f,-1.5f,0f), Quaternion.Euler(0, 0, rotation));
         planetUI.GetComponent<Renderer>().sortingOrder = 31;
         planetUI.GetComponent<Transform>().localScale = planetSize;
         planetUI.GetComponent<Renderer>().material.color = planetColor;
@@ -62,15 +67,16 @@ public class LevelSetup : MonoBehaviour
 
     private void RandomizeSun()
     {
-        int randomSun = Random.Range(0, sunOverlays.Length);
+        int randomSun = Random.Range(0, sunOverlays.Length+1);
         if(randomSun < 2)
         {
-            sunOverlays[0].gameObject.SetActive(true);
+            chosenSunOverlay = sunOverlays[0];
         }
         else
         {
-            sunOverlays[randomSun - 1].gameObject.SetActive(true);
-            Instantiate(buildingBarBlocks[randomSun - 2], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            chosenSunOverlay = sunOverlays[randomSun - 1];
+            GameObject temp = Instantiate(buildingBarBlocks[randomSun - 2], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            temp.GetComponent<BuildingUI>().SetKeyCode(keys[0]);
             buildingBarCurrentPosition += 1;
         }
     }
@@ -110,7 +116,8 @@ public class LevelSetup : MonoBehaviour
     {
         for(int i = 0; i < rocketUI.Length; i++)
         {
-            Instantiate(rocketUI[i], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            GameObject temp = Instantiate(rocketUI[i], new Vector3(buildingBarCurrentPosition, -3.2f, 0f), Quaternion.Euler(0, 0, 0));
+            temp.GetComponent<BuildingUI>().SetKeyCode(keys[buildingBarCurrentPosition - 1]);
             buildingBarCurrentPosition += 1;
         }
     }
@@ -125,7 +132,7 @@ public class LevelSetup : MonoBehaviour
             {
                 Destroy(gameObject);
                 Destroy(planetUI);
-                playerAvatar.gameObject.SetActive(true);
+                chosenSunOverlay.gameObject.SetActive(true);
                 Time.timeScale = 1f;
             }
         }

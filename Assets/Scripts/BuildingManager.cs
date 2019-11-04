@@ -66,6 +66,8 @@ public class BuildingManager : MonoBehaviour
     public void BeginBuildingPlacement(int cost, GameObject buildingToPlace, GameObject buildingToConstruct)
     {
         resetCurrentBuilding();
+        Debug.Log(buildingToConstruct.tag);
+        Debug.Log(buildingToPlace.tag);
         placementBuilding = Instantiate(buildingToPlace, playerMovement.GetCurrentLocation(), playerMovement.GetCurrentRotationQuaternion());
         constructionBuilding = buildingToConstruct;
         buildingCost = cost;

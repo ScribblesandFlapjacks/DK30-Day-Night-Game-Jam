@@ -11,6 +11,9 @@ public class Temperature : MonoBehaviour
     [SerializeField] Slider thermometer;
     bool isInSun = false;
 
+    bool isNearFire = false;
+    bool isUnderParasol = false;
+
     PlayerHealth playerHealth;
     AudioSource starside;
 
@@ -58,9 +61,11 @@ public class Temperature : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (isInSun) {
+        if (isInSun && !isUnderParasol) {
             IncreaseTemperature(sunIncreaseTemp * Time.deltaTime);
             //Debug.Log("Temp is going up " + currentTemperature);
+        } else if (isNearFire) {
+            IncreaseTemperature(sunIncreaseTemp * Time.deltaTime);
         } else {
             DecreaseTemperature(sunDecreaseTemp * Time.deltaTime);
             //Debug.Log("Temp is decreasing " + currentTemperature);
@@ -80,5 +85,22 @@ public class Temperature : MonoBehaviour
     public float GetCurrentTemperature()
     {
         return currentTemperature;
+    }
+
+    public void UnderParasol(bool isUnder)
+    {
+        isUnderParasol = isUnder;
+        if (isUnder)
+        {
+            starside.Stop();
+        } else
+        {
+            starside.Play();
+        }
+    }
+
+    public void NearFire(bool isNear)
+    {
+        isNearFire = isNear;
     }
 }
