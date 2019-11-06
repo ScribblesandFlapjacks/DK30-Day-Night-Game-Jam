@@ -11,6 +11,7 @@ public class Buildings : MonoBehaviour
     int storedResources = 0;
     int maxVolume = 50;
     float productionRate = 5f;
+    float buildingDamageRate = 3f;
 
     //cached references
     Renderer building;
@@ -18,6 +19,7 @@ public class Buildings : MonoBehaviour
     Renderer buildingIndicator;
 
     bool playerIsHere = false;
+    bool inSun = false;
 
     // Start is called before the first frame update
     void Start()
@@ -63,11 +65,23 @@ public class Buildings : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (inSun)
+        {
+            DamageBuilding(buildingDamageRate * Time.deltaTime);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             playerIsHere = true;
+        }
+        if (collision.gameObject.layer.Equals(8))
+        {
+            inSun = true;
         }
     }
 
@@ -76,6 +90,10 @@ public class Buildings : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerIsHere = false;
+        }
+        if (collision.gameObject.layer.Equals(8))
+        {
+            inSun = false;
         }
     }
 

@@ -14,7 +14,7 @@ public class RocketBase : MonoBehaviour
 
     private IEnumerator BuildTime()
     {
-        GameObject.Find("BuildingBar/RocketBottomUIBlock").GetComponent<BuildingUI>().noLongerPlaceable();
+        GameObject.Find("RocketBottomUIBlock(Clone)").GetComponent<BuildingUI>().noLongerPlaceable();
         gameObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 150);
         yield return new WaitForSeconds(buildingManager.rocketDelay());
         gameObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);

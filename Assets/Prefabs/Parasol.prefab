@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6977107533982768725}
   - component: {fileID: 6209102868410807804}
   - component: {fileID: 961750956318606348}
+  - component: {fileID: 4571048133470064721}
   m_Layer: 0
   m_Name: Parasol
   m_TagString: Building
@@ -121,6 +122,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7f286d0a27be740ac17695c877edb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inSun: 0
+--- !u!50 &4571048133470064721
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452526279041312725}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8442525068454993010
 GameObject:
   m_ObjectHideFlags: 0

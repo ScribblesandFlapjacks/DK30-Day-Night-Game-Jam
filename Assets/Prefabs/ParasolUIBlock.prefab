@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29db0ceedc0fd4943bb7a8f97e777518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingCost: 50
+  buildingCost: 25
   buildingCostText: {fileID: 5051625219698623206}
   keyCode: 49
   building: {fileID: 452526279041312725, guid: b22a5f6c754cc7846adc4af345ffe5c5, type: 3}

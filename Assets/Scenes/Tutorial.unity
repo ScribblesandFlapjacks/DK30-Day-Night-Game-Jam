@@ -190,13 +190,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Keys
 
-    1
-
-    2
-
-    3
-
-    4
+    Number Keys
 
     Space Bar
 
@@ -1226,13 +1220,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Controls
 
-    Place Mine
-
-    Place Rocket Base
-
-    Place Rocket Middle
-
-    Place Rocket Top
+    Place Buildings
 
     Confirm Construction
 
